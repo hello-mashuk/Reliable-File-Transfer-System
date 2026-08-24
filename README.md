@@ -320,18 +320,3 @@ Done in 3.87s.
 
 ---
 
-## Presentation Cheat-Sheet (see chat response below for the full walkthrough)
-
-If you only remember three things for your defense:
-
-1. **`hamming.py`** does the actual error-correcting math — parity bits
-   `p1,p2,p3` are computed with XOR, and the receiver's "syndrome"
-   (`c4,c2,c1` read as a binary number) directly tells you which of the 7
-   bits to flip back.
-2. **`error_simulator.py`** injects noise at the *application* level
-   (after encoding, before the socket) — because TCP would silently erase
-   any corruption introduced at the network level.
-3. **`protocol.py`** exists because a single `socket.recv()` call is never
-   guaranteed to return a whole message — `recv_exact()` loops until it has
-   exactly the number of bytes it was promised by the 4-byte/8-byte length
-   prefix that came before it.
